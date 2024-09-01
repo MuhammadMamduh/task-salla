@@ -3,7 +3,6 @@ import {expect, Page, Locator} from '@playwright/test'
 export class ArtsworksPage{
     readonly page: Page;
     readonly addArtworkBtn: Locator;
-    readonly loginBtn: Locator;
 
     constructor(page: Page){
         this.page = page;
@@ -17,4 +16,5 @@ export class ArtsworksPage{
     goToAddArtworkPage = async () => {
         await this.addArtworkBtn.click();
     }
+
 }
