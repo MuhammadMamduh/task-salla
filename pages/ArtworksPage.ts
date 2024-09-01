@@ -14,6 +14,7 @@ export class ArtsworksPage{
     }
 
     goToAddArtworkPage = async () => {
+        await this.addArtworkBtn.waitFor();
         await this.addArtworkBtn.click();
     }
 
