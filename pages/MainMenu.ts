@@ -1,6 +1,6 @@
 import {expect, Page, Locator} from '@playwright/test'
 
-export class HomesPage{
+export class MainMenu{
     readonly page: Page;
     readonly artistsPageBtn: Locator;
     readonly artworksPageBtn: Locator;
@@ -11,30 +11,36 @@ export class HomesPage{
 
     constructor(page: Page){
         this.page = page;
-        this.artistsPageBtn = this.page.locator("[id='artists']");
-        this.artworksPageBtn = this.page.locator("[id='artworks']");
-        this.collectorsPageBtn = this.page.locator("[id='collectors']");
-        this.blogsPageBtn = this.page.locator("[id='blogs']");
-        this.eventsPageBtn = this.page.locator("[id='events']");
+        this.artistsPageBtn = this.page.locator("//*[not(ancestor::div[@class='xl:hidden'])]/nav/a/span[@id='artists']");
+        this.artworksPageBtn = this.page.locator("//*[not(ancestor::div[@class='xl:hidden'])]/nav/a/span[@id='artworks']").last();
+        this.collectorsPageBtn = this.page.locator("//*[not(ancestor::div[@class='xl:hidden'])]/nav/a/span[@id='collectors']");
+        this.blogsPageBtn = this.page.locator("//*[not(ancestor::div[@class='xl:hidden'])]/nav/a/span[@id='blogs']");
+        this.eventsPageBtn = this.page.locator("//*[not(ancestor::div[@class='xl:hidden'])]/nav/a/span[@id='events']");
         this.loginPageBtn = this.page.locator("a[href='/login']");
     }
 
     goToArtistsPage = async () => {
+        await this.artistsPageBtn.waitFor();
         await this.artistsPageBtn.click();
     }
     goToArtworksPage = async () => {
+        await this.artworksPageBtn.waitFor();
         await this.artworksPageBtn.click();
     }
     goToCollectorsPage = async () => {
+        await this.collectorsPageBtn.waitFor();
         await this.collectorsPageBtn.click();
     }
     goToBlogsPage = async () => {
+        await this.blogsPageBtn.waitFor();
         await this.blogsPageBtn.click();
     }
     goToEventsPage = async () => {
+        await this.eventsPageBtn.waitFor();
         await this.eventsPageBtn.click();
     }
     goToLoginPage = async () => {
+        await this.loginPageBtn.waitFor();
         await this.loginPageBtn.click();
     }
 }
