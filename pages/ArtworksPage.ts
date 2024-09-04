@@ -37,6 +37,8 @@ export class ArtsworksPage{
         let counter:number = 1;
         while(!this.artworkTitle.isVisible() || counter<=5){
             await this.page.reload();
+            await this.page.waitForURL("https://staging.alt.art/artworks");
+            
             counter++;
         }
         await this.artworkTitle.waitFor();

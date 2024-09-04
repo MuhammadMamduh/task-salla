@@ -21,17 +21,19 @@ test.beforeEach(async ({ page }) => {
 let artworkTitle: string = faker.lorem.words({ min: 1, max: 3 });
 test('TC_1 | ADD Artwork and Verify its ADDED', async ({ page }, testInfo) => {
 
-  // initialize
+  // INITIALIZE:
+  // ============
   const mainMenu = new MainMenu(page);
   const artsworkPage = new ArtsworksPage(page);
   const addArtworksPage = new AddArtworksPage(page);
   
   
-  // steps
+  // STEPS:
+  // =======
   await mainMenu.goToArtworksPage();
   await artsworkPage.goToAddArtworkPage();
   await addArtworksPage.createArtwork(artworkTitle, 100);
-  // verify
+  // // VERIFY THAT:
   await artsworkPage.verifyArtworkCreation(artworkTitle);
   const screenshot = await page.screenshot({ path: './screenshots/' + testInfo.title + "_retry_" + testInfo.retry.toString() + '_screenshot.png', fullPage: true });
   await testInfo.attach('screenshot', { body: screenshot, contentType: 'image/png' })
