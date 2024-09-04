@@ -44,4 +44,10 @@ export class ArtsworksPage{
         await artworkTitle.click();
     }
 
+    openArtworkAtByTitle = async (artworkTitle:string) => {
+        this.artworkTitle = this.page.getByRole('heading', { name: artworkTitle })
+        await this.artworkTitle.waitFor();
+        await this.artworkTitle.click();
+    }
+
 }

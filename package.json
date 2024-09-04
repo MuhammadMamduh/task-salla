@@ -5,7 +5,7 @@
   "scripts": {
     "test": "playwright test --repeat-each 10  --workers 1",
     "test-parallel": "playwright test --repeat-each 10 --workers 7 --headed",
-    "allure-generate": "allure generate ./allure-results -o ./allure-report",
+    "allure-generate": "allure generate ./allure-results -o ./allure-report --clean",
     "allure-open": "allure open ./allure-report"
   },
   "keywords": [],
