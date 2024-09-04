@@ -27,6 +27,8 @@ export class MainMenu{
         // await this.artworksPageBtn.waitFor();
         // await this.artworksPageBtn.click();
         await this.page.goto("https://staging.alt.art/artworks");
+        await this.page.reload();
+        await this.page.waitForURL("https://staging.alt.art/artworks");
     }
     goToCollectorsPage = async () => {
         await this.collectorsPageBtn.waitFor();
