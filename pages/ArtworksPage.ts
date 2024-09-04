@@ -13,19 +13,19 @@ export class ArtsworksPage{
 
     visit = async () => {
         await this.page.goto("https://staging.alt.art/artworks");
-        // await this.page.waitForURL("https://staging.alt.art/artworks");
     }
 
     goToAddArtworkPage = async () => {
         await this.addArtworkBtn.waitFor();
         await this.addArtworkBtn.click();
         await this.page.waitForURL("https://staging.alt.art/artworks/create");
+
+        // alternative way
+        // await this.page.goto("https://staging.alt.art/artworks/create");
     }
 
     verifyArtworkTitle = async (expectedArtworkTitle:string) => {
         let actualArtworkTitle = await this.artworkTitlesList.nth(0);
-        console.log("actualArtworkTitle: " + (await actualArtworkTitle.isVisible()).toString());
-        // expect(actualArtworkTitle).toBeVisible()
         await actualArtworkTitle.waitFor();
 
         await expect(actualArtworkTitle).toHaveText(expectedArtworkTitle);

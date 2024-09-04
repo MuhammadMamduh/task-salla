@@ -15,9 +15,10 @@ test.beforeEach(async ({ page }) => {
   await homePage.visit();
   await mainMenu.goToLoginPage();
   await loginPage.login("jamiwa8396@tospage.com", "nhk9dad2EQW!xae_bpm");
+  await page.waitForURL('https://staging.alt.art/');
 });
 
-test('TC_1 | ADD Artwork and Verify its ADDED', async ({ page }) => {
+test('TC_1 | ADD Artwork and Verify its ADDED', async ({ page }, testInfo) => {
 
   // initialize
   const mainMenu = new MainMenu(page);
@@ -31,22 +32,32 @@ test('TC_1 | ADD Artwork and Verify its ADDED', async ({ page }) => {
   await addArtworksPage.createArtwork(artworkTitle, 100);
   // verify
   await artsworkPage.verifyArtworkTitle(artworkTitle);
+  const screenshot = await page.screenshot({ path: './screenshots/' + testInfo.title + 'screenshot.png', fullPage: true });
+  await testInfo.attach('screenshot', { body: screenshot, contentType: 'image/png' })
 });
 
-test('TC_2 | ADD Review & Verify its ADDED', async ({ page }) => {
+test('TC_2 | ADD Review & Verify its ADDED', async ({ page }, testInfo) => {
 
-  // initialize
+  // INITIALIZE:
+  // ============
   const mainMenu = new MainMenu(page);
   const artsworkPage = new ArtsworksPage(page);
   const artworkDetailsPage = new ArtworkDetailsPage(page);
   let reviewTitle: string = faker.word.words({ count: { min: 1, max: 3 }});
   let reviewDetails: string = faker.word.words({ count: { min: 5, max: 20 } });
 
-  // steps
+  // STEPS:
+  // =======
+  // (1) Open the Artworks List page
   await mainMenu.goToArtworksPage();
+
+  // (2) Open the last Artwork Details page (the Artwork that we have just added)
   await artsworkPage.openArtworkAtIndex(0);
+  // (3) Add a review
   await artworkDetailsPage.addReview(reviewTitle, reviewDetails);
 
-  // verify
+  // VERIFY THAT: the review was added (by comparing the review we added with the last review)
   await artworkDetailsPage.verifyReview(reviewTitle, reviewDetails);
+  const screenshot = await page.screenshot({ path: './screenshots/' + testInfo.title + 'screenshot.png', fullPage: true });
+  await testInfo.attach('screenshot', { body: screenshot, contentType: 'image/png' })
 });
