@@ -10,6 +10,7 @@ export class HomePage{
     }
 
     visit = async () => {
-        await this.page.goto("https://staging.alt.art/");
+        await this.page.goto("https://staging.alt.art/", {waitUntil: "domcontentloaded"});
+        // await this.page.waitForURL("https://staging.alt.art/");
     }
 }

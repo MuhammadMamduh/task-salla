@@ -10,8 +10,17 @@ import { defineConfig, devices } from '@playwright/test';
 /**
  * See https://playwright.dev/docs/test-configuration.
  */
-export default defineConfig({
+export default defineConfig({  
   testDir: './tests',
+    /* Maximum time one test can run for. */
+    timeout: 120 * 1000,
+    expect: {
+      /**
+       * Maximum time expect() should wait for the condition to be met.
+       * For example in `await expect(locator).toHaveText();`
+       */
+      timeout: 50000
+    },
   /* Run tests in files in parallel */
   fullyParallel: true,
   /* Fail the build on CI if you accidentally left test.only in the source code. */
@@ -29,6 +38,14 @@ export default defineConfig({
 
     /* Collect trace when retrying the failed test. See https://playwright.dev/docs/trace-viewer */
     trace: 'on-first-retry',
+    ...devices['Desktop Chrome'],
+    deviceScaleFactor: undefined,
+    viewport: null,
+    launchOptions: {
+      // 1
+      // args: ["--start-maximized"],
+      // slowMo: 3_00,
+    },
   },
 
   /* Configure projects for major browsers */
@@ -36,17 +53,15 @@ export default defineConfig({
     {
       name: 'chromium',
       use: { ...devices['Desktop Chrome'] },
-    }
-
-    // {
-    //   name: 'firefox',
-    //   use: { ...devices['Desktop Firefox'] },
-    // },
-
-    // {
-    //   name: 'webkit',
-    //   use: { ...devices['Desktop Safari'] },
-    // },
+    },
+    {
+      name: 'firefox',
+      use: { ...devices['Desktop Firefox'] },
+    },
+    {
+      name: 'webkit',
+      use: { ...devices['Desktop Safari'] },
+    },
 
     /* Test against mobile viewports. */
     // {

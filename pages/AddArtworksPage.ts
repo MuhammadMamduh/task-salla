@@ -39,7 +39,7 @@ export class AddArtworksPage{
         this.editionsDropdown = this.page.getByRole('button', { name: 'Select Edition Type' });
         this.descriptionField = this.page.locator("//div[@id='editorblock']//div[@contenteditable='true']");
         this.currentPriceField = this.page.locator("input[id='current_price']");
-        this.priceAtPrimarySaleField = this.page.locator("input[id='primary_sale_price']");
+        this.priceAtPrimarySaleField = this.page.locator("//input[@id='primary_sale_price']");
         this.primarySaleDateBtn = this.page.locator("//p[text()='Date At Primary Sale']//following-sibling::button[1]");
         this.primarySaleBuyerField = this.page.locator("//label[text()='Primary Sale Buyer']//following-sibling::div//div//input");
         this.uploadArtworkFileInput = this.page.locator("input[type='file']");
@@ -62,6 +62,7 @@ export class AddArtworksPage{
 
     createArtwork = async (name:string, price:number) => {
         await this.artworkNameField.waitFor();
+        await this.artworkNameField.clear();
         await this.artworkNameField.fill(name);
 
         await this.editionsDropdown.waitFor();
@@ -71,8 +72,11 @@ export class AddArtworksPage{
         await this.editionsDropdownListItems.click();
 
         await this.descriptionField.waitFor();
+        await this.descriptionField.clear();
         await this.descriptionField.fill("Test102478");
+        await this.currentPriceField.clear();
         await this.currentPriceField.fill(price.toString(), { force: true });
+        await this.priceAtPrimarySaleField.clear();
         await this.priceAtPrimarySaleField.fill((price - 20).toString(), { force: true });
 
         await this.primarySaleDateBtn.waitFor();
@@ -85,7 +89,8 @@ export class AddArtworksPage{
         await this.primarySaleDateBtn.click();
         
         await this.primarySaleBuyerField.waitFor();
-        await this.primarySaleBuyerField.fill("test@test.com")
+        await this.primarySaleBuyerField.clear();
+        await this.primarySaleBuyerField.fill("test@test.com");
 
         let projectRoot:string = process.cwd();
         let filePath:string = projectRoot + "/resources/data/images/aqsa.jpeg"
@@ -115,9 +120,11 @@ export class AddArtworksPage{
         await this.supplyDropdownListItems.click();
 
         await this.collaboratorField.waitFor();
+        await this.collaboratorField.clear();
         await this.collaboratorField.fill("test@test.com", { force: true });
 
         await this.owenedByField.waitFor();
+        await this.owenedByField.clear();
         await this.owenedByField.fill("test@test.com");
 
         await this.marketplaceMintedOnDropdown.waitFor();
@@ -128,6 +135,7 @@ export class AddArtworksPage{
         await this.marketplaceMintedonListItems.click();
 
         await this.marketplaceUrlField.waitFor();
+        await this.marketplaceUrlField.clear();
         await this.marketplaceUrlField.fill("https://www.google.com/");
 
 
@@ -162,7 +170,7 @@ export class AddArtworksPage{
 
         if(await this.publishBtn.isDisabled())
         {
-            this.page.pause();
+            // this.page.pause();
         }
         await expect(this.publishBtn).toBeEnabled();
         await this.publishBtn.click();

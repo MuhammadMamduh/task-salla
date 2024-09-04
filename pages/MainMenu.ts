@@ -41,6 +41,14 @@ export class MainMenu{
     }
     goToLoginPage = async () => {
         await this.loginPageBtn.waitFor();
-        await this.loginPageBtn.click();
+
+        if (await this.loginPageBtn.isVisible()) {
+            await this.loginPageBtn.click();
+            await this.page.waitForURL("https://staging.alt.art/login");
+        }
+        else{
+            console.error("It seems that the Login Button is not visible, which probably means that you are already logged in")
+        }
+        
     }
 }

@@ -15,15 +15,19 @@ export class LoginPage{
 
     visit = async () => {
         await this.page.goto("https://staging.alt.art/login");
+        await this.page.waitForURL("https://staging.alt.art/login");
     }
 
     login = async (email:string, password:string) => {
         await this.emailField.waitFor();
-        await this.passwordField.waitFor();
-        await this.loginBtn.waitFor();
-
+        await this.emailField.clear();
         await this.emailField.fill(email);
+
+        await this.passwordField.waitFor();
+        await this.passwordField.clear();
         await this.passwordField.fill(password);
+
+        await this.loginBtn.waitFor();
         await this.loginBtn.click();
     }
 }
