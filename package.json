@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
-    "test": "playwright test --repeat-each 10",
+    "test": "playwright test --repeat-each 10  --workers 1 --headed",
     "test-parallel": "playwright test --repeat-each 10 --workers 7 --headed",
     "allure-generate": "allure generate ./allure-results -o ./allure-report",
     "allure-open": "allure open ./allure-report"

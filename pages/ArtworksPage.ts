@@ -31,6 +31,13 @@ export class ArtsworksPage{
         await expect(actualArtworkTitle).toHaveText(expectedArtworkTitle);
     }
 
+    verifyArtworkCreation = async (expectedArtworkTitle:string) => {
+        let actualArtworkTitle = await this.artworkTitlesList.nth(0);
+        await actualArtworkTitle.waitFor();
+
+        await expect(actualArtworkTitle).toHaveText(expectedArtworkTitle);
+    }
+
     openArtworkAtIndex = async (index:number) => {
         let artworkTitle = await this.artworkTitlesList.nth(index);
         await artworkTitle.waitFor();

@@ -28,6 +28,7 @@ test('TC_1 | ADD Artwork and Verify its ADDED', async ({ page }, testInfo) => {
   
   // steps
   await mainMenu.goToArtworksPage();
+  await page.pause();
   await artsworkPage.goToAddArtworkPage();
   await addArtworksPage.createArtwork(artworkTitle, 100);
   // verify
