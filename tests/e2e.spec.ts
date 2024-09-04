@@ -53,7 +53,7 @@ test('TC_2 | ADD Review & Verify its ADDED', async ({ page }, testInfo) => {
   await mainMenu.goToArtworksPage();
 
   // (2) Open the last Artwork Details page (the Artwork that we have just added)
-  await artsworkPage.openArtworkAtIndex(0);
+  // await artsworkPage.openArtworkAtIndex(0);
   await artsworkPage.openArtworkAtByTitle(artworkTitle);
   // (3) Add a review
   await artworkDetailsPage.addReview(reviewTitle, reviewDetails);
