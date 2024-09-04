@@ -34,6 +34,11 @@ export class ArtsworksPage{
 
     verifyArtworkCreation = async (expectedArtworkTitle:string) => {
         this.artworkTitle = this.page.getByRole('heading', { name: expectedArtworkTitle })
+        let counter:number = 1;
+        while(!this.artworkTitle.isVisible() || counter<=5){
+            await this.page.reload();
+            counter++;
+        }
         await this.artworkTitle.waitFor();
         await expect(this.artworkTitle).toHaveText(expectedArtworkTitle);
     }

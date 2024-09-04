@@ -33,7 +33,7 @@ test('TC_1 | ADD Artwork and Verify its ADDED', async ({ page }, testInfo) => {
   await addArtworksPage.createArtwork(artworkTitle, 100);
   // verify
   await artsworkPage.verifyArtworkCreation(artworkTitle);
-  const screenshot = await page.screenshot({ path: './screenshots/' + testInfo.title + '_screenshot.png', fullPage: true });
+  const screenshot = await page.screenshot({ path: './screenshots/' + testInfo.title + "_retry_" + testInfo.retry.toString() + '_screenshot.png', fullPage: true });
   await testInfo.attach('screenshot', { body: screenshot, contentType: 'image/png' })
 });
 
@@ -60,6 +60,7 @@ test('TC_2 | ADD Review & Verify its ADDED', async ({ page }, testInfo) => {
 
   // VERIFY THAT: the review was added (by comparing the review we added with the last review)
   await artworkDetailsPage.verifyReview(reviewTitle, reviewDetails);
-  const screenshot = await page.screenshot({ path: './screenshots/' + testInfo.title + '_screenshot.png', fullPage: true });
+
+  const screenshot = await page.screenshot({ path: './screenshots/' + testInfo.title + "_retry_" + testInfo.retry.toString() + '_screenshot.png', fullPage: true });
   await testInfo.attach('screenshot', { body: screenshot, contentType: 'image/png' })
 });

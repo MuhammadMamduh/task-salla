@@ -167,13 +167,10 @@ export class AddArtworksPage{
         await this.physicalPieceRadiobtnNo.check();
 
         await this.publishBtn.waitFor();
-
-        if(await this.publishBtn.isDisabled())
-        {
-            // this.page.pause();
-        }
         await expect(this.publishBtn).toBeEnabled();
         await this.publishBtn.click();
+
+        await this.page.waitForURL("https://staging.alt.art/artworks");
     }
 
 }
