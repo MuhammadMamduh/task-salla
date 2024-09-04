@@ -15,8 +15,8 @@ export class ArtworkDetailsPage{
         this.reviewTitle = this.page.locator("//input[@id='review-title']");
         this.reviewDetails = this.page.locator("//textarea[@id='review-detail']");
         this.submitReviewBtn = this.page.locator("//textarea[@id='review-detail']//following-sibling::button");
-        this.lastReviewTitle = this.page.locator("//html/body//div[1]/main//div[4]//div[2]//div[3]//div//div//div[3]//div//div[2]//h5");
-        this.lastReviewDetails = this.page.locator("//html//body//div[1]//main//div[4]//div[2]//div[3]/div//div//div[3]//div//div[2]//div[2]//p");
+        this.lastReviewTitle = this.page.locator("//html/body//div[1]/main//div[4]//div[2]//div[3]//div//div//div[3]//div//div[2]//h5[1]");
+        this.lastReviewDetails = this.page.locator("//html//body//div[1]//main//div[4]//div[2]//div[3]/div//div//div[3]//div//div[2]//div[2]//p[1]");
     }
 
     addReview = async (title:string, details:string) => {
