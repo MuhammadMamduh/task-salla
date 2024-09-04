@@ -24,8 +24,9 @@ export class MainMenu{
         await this.artistsPageBtn.click();
     }
     goToArtworksPage = async () => {
-        await this.artworksPageBtn.waitFor();
-        await this.artworksPageBtn.click();
+        // await this.artworksPageBtn.waitFor();
+        // await this.artworksPageBtn.click();
+        await this.page.goto("https://staging.alt.art/artworks");
     }
     goToCollectorsPage = async () => {
         await this.collectorsPageBtn.waitFor();
