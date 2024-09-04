@@ -16,8 +16,9 @@
 ### How to run:
 1) use `npm test` to run the tests in series.
 2) use `npm run test-parallel` to run the tests in parallel.
-3) use `npm run allure-generate` to generate allure reports.
-4) use `npm run allure-open` to open the generated allure reports.
+3) use `npx playwright show-report` to show the default playwright report.
+4) use `npm run allure-generate` to generate allure reports.
+5) use `npm run allure-open` to open the generated allure reports.
 ### Future Enhancements
 + Create a utilities class to wrap up common functionalities.
 + Use the faker library more in the code.
