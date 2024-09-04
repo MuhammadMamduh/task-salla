@@ -31,7 +31,7 @@ test('TC_1 | ADD Artwork and Verify its ADDED', async ({ page }, testInfo) => {
   await artsworkPage.goToAddArtworkPage();
   await addArtworksPage.createArtwork(artworkTitle, 100);
   // verify
-  await artsworkPage.verifyArtworkTitle(artworkTitle);
+  await artsworkPage.verifyArtworkCreation(artworkTitle);
   const screenshot = await page.screenshot({ path: './screenshots/' + testInfo.title + 'screenshot.png', fullPage: true });
   await testInfo.attach('screenshot', { body: screenshot, contentType: 'image/png' })
 });

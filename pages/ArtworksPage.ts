@@ -4,6 +4,7 @@ export class ArtsworksPage{
     readonly page: Page;
     readonly addArtworkBtn: Locator;
     readonly artworkTitlesList: Locator;
+    artworkTitle: Locator;
 
     constructor(page: Page){
         this.page = page;
@@ -32,10 +33,9 @@ export class ArtsworksPage{
     }
 
     verifyArtworkCreation = async (expectedArtworkTitle:string) => {
-        let actualArtworkTitle = await this.artworkTitlesList.nth(0);
-        await actualArtworkTitle.waitFor();
-
-        await expect(actualArtworkTitle).toHaveText(expectedArtworkTitle);
+        this.artworkTitle = this.page.getByRole('heading', { name: expectedArtworkTitle })
+        await this.artworkTitle.waitFor();
+        await expect(this.artworkTitle).toHaveText(expectedArtworkTitle);
     }
 
     openArtworkAtIndex = async (index:number) => {
