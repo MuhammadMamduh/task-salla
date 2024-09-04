@@ -94,7 +94,7 @@ export class AddArtworksPage{
 
         let projectRoot:string = process.cwd();
         let filePath:string = projectRoot + "/resources/data/images/aqsa.jpeg"
-        console.log('Project Root Directory:',  projectRoot + "/resources/data/images/aqsa.jpeg");
+        // console.log('Project Root Directory:',  projectRoot + "/resources/data/images/aqsa.jpeg");
 
         await this.uploadArtworkFileInput.setInputFiles(filePath);
 

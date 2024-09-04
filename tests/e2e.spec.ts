@@ -27,14 +27,21 @@ test('TC_1 | ADD Artwork and Verify its ADDED', async ({ page }, testInfo) => {
   const artsworkPage = new ArtsworksPage(page);
   const addArtworksPage = new AddArtworksPage(page);
   
-  
   // STEPS:
   // =======
+  // (1) Open the Artworks List page
   await mainMenu.goToArtworksPage();
+
+  // (2) Open the add Artworks page
   await artsworkPage.goToAddArtworkPage();
+
+  // (3) Create a new Artwork
   await addArtworksPage.createArtwork(artworkTitle, 100);
-  // // VERIFY THAT:
-  await artsworkPage.verifyArtworkCreation(artworkTitle);
+
+  // VERIFY THAT: the artwork has been created
+  await test.step('VERIFY THAT: the artwork has been created)', async () =>{
+    await artsworkPage.verifyArtworkCreation(artworkTitle);
+  })
   const screenshot = await page.screenshot({ path: './screenshots/' + testInfo.title + "_retry_" + testInfo.retry.toString() + '_screenshot.png', fullPage: true });
   await testInfo.attach('screenshot', { body: screenshot, contentType: 'image/png' })
 });
@@ -55,13 +62,14 @@ test('TC_2 | ADD Review & Verify its ADDED', async ({ page }, testInfo) => {
   await mainMenu.goToArtworksPage();
 
   // (2) Open the last Artwork Details page (the Artwork that we have just added)
-  // await artsworkPage.openArtworkAtIndex(0);
   await artsworkPage.openArtworkAtByTitle(artworkTitle);
   // (3) Add a review
   await artworkDetailsPage.addReview(reviewTitle, reviewDetails);
 
   // VERIFY THAT: the review was added (by comparing the review we added with the last review)
-  await artworkDetailsPage.verifyReview(reviewTitle, reviewDetails);
+  await test.step('VERIFY THAT: the review was added (by comparing the review we added with the last review)', async () =>{
+    await artworkDetailsPage.verifyReview(reviewTitle, reviewDetails);
+  })
 
   const screenshot = await page.screenshot({ path: './screenshots/' + testInfo.title + "_retry_" + testInfo.retry.toString() + '_screenshot.png', fullPage: true });
   await testInfo.attach('screenshot', { body: screenshot, contentType: 'image/png' })
